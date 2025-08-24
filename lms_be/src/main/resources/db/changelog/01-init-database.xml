@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
+
+    <!-- Parents -->
+    <changeSet id="202508231600" author="huy">
+        <createTable tableName="parents">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="phone" type="VARCHAR(50)"/>
+            <column name="email" type="VARCHAR(255)"/>
+        </createTable>
+        <createTable tableName="students">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="dob" type="DATE"/>
+            <column name="gender" type="VARCHAR(10)"/>
+            <column name="current_grade" type="VARCHAR(50)"/>
+            <column name="parent_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_students_parents" references="parents(id)"/>
+            </column>
+        </createTable>
+        <createTable tableName="classes">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="subject" type="VARCHAR(255)"/>
+            <column name="day_of_week" type="VARCHAR(20)"/>
+            <column name="time_slot" type="VARCHAR(50)"/>
+            <column name="teacher_name" type="VARCHAR(255)"/>
+            <column name="max_students" type="INT"/>
+        </createTable>
+        <createTable tableName="class_registrations">
+            <column name="class_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_registrations_classes" references="classes(id)"/>
+            </column>
+            <column name="student_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_registrations_students" references="students(id)"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="class_registrations"
+                       columnNames="class_id, student_id"
+                       constraintName="pk_class_registrations"/>
+        <createTable tableName="subscriptions">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="student_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_subscriptions_students" references="students(id)"/>
+            </column>
+            <column name="package_name" type="VARCHAR(255)"/>
+            <column name="start_date" type="DATE"/>
+            <column name="end_date" type="DATE"/>
+            <column name="total_sessions" type="INT"/>
+            <column name="used_sessions" type="INT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="202508141700" author="huy">
+        <sqlFile path="db/sql/data_template.sql"/>
+    </changeSet>
+</databaseChangeLog>

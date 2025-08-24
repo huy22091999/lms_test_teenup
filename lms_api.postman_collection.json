@@ -1,0 +1,352 @@
+{
+	"info": {
+		"_postman_id": "f1b5ebab-3af9-4c5d-811b-24ae16eaeb0d",
+		"name": "lms",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37933535"
+	},
+	"item": [
+		{
+			"name": "dashboard",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/api/statistics",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"statistics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tạo phụ huynh",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Nguyen Van Huy\",\r\n  \"phone\": \"0987654321\",\r\n  \"email\": \"nguyenvanhuy@example.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/parents",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "xem chi tiết phụ huynh",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/api/parents/1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"parents",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tạo học sinh",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Nguyen Van A\",\r\n  \"dob\": \"2010-05-12\",\r\n  \"gender\": \"Male\",\r\n  \"currentGrade\": \"Grade 8\",\r\n  \"parent\":{\r\n    \"id\":1\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/students",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "xem chi tiết tt học sinh bao gồm thông tin parent",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/api/students/3",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"students",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tạo lớp mới",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Lớp Toán 9A\",\r\n  \"subject\": \"Toán học\",\r\n  \"dayOfWeek\": \"Monday\",\r\n  \"timeSlot\": \"08:00-09:30\",\r\n  \"teacherName\": \"Nguyễn Văn Nam\",\r\n  \"maxStudents\": 30\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/classes",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"classes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "danh sách lớp theo ngày",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/api/classes?day=Monday",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"classes"
+					],
+					"query": [
+						{
+							"key": "day",
+							"value": "Monday"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "đăng ký học sinh vào lớp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/api/classes/1/register?studentId=3",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"classes",
+						"1",
+						"register"
+					],
+					"query": [
+						{
+							"key": "studentId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "khởi tạo gói học",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"studentId\": 3,\r\n  \"packageName\": \"Gói Toán 10 buổi\",\r\n  \"startDate\": \"2025-09-01\",\r\n  \"endDate\": \"2025-12-01\",\r\n  \"totalSessions\": 10,\r\n  \"usedSessions\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/subscriptions",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"subscriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "đánh dấu đã dùng 1 buổi",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.175.66:8080/api/subscriptions/1/use",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"175",
+						"66"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"subscriptions",
+						"1",
+						"use"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "xem trạng thái gói",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/api/subscriptions/1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"subscriptions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "danh sách học sinh",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/api/students",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "danh sách phụ huynh",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/api/parents",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

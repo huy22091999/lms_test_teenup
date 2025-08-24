@@ -1,0 +1,45 @@
+
+services:
+  db:
+    image: postgres:15
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: appdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  lms_be:
+    build:
+      context: ./lms_be
+      dockerfile: Dockerfile
+    container_name: lms_be
+    image: huycntt/lms_be
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/appdb
+      SPRING_DATASOURCE_USERNAME: appuser
+      SPRING_DATASOURCE_PASSWORD: secret
+    ports:
+      - "8080:8080"
+
+  lms_fe:
+    build:
+      context: ./lms_fe
+      dockerfile: Dockerfile
+    container_name: lms_fe
+    image: huycntt/lms_fe
+    depends_on:
+      - lms_be
+    environment:
+      API_URL: http://127.0.0.1:8080  ## ip hoặc domain public của backend
+    ports:
+      - "3000:80"
+
+volumes:
+  db_data:
